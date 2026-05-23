@@ -1,0 +1,20 @@
+id: HFA-KRS-001
+severity: high
+category: keras.lambda_layer
+description: >
+  Lambda layer detected in Keras model. Lambda layers embed arbitrary Python code
+  (serialized as marshalled bytecode) that executes automatically on model load via
+  keras.models.load_model(). This is the primary code execution vector in Keras files.
+references:
+  - "https://keras.io/api/layers/core_layers/lambda/"
+  - "https://github.com/keras-team/keras/blob/master/keras/src/layers/core/lambda_layer.py"
+false_positive_notes: >
+  Lambda layers are used in legitimate Keras models for custom operations
+  (e.g., custom activation functions, tensor manipulation). A model with a
+  Lambda layer containing only standard NumPy/TF operations is likely benign.
+  The presence of a Lambda layer alone warrants inspection but is not conclusive.
+bypass_notes: >
+  An attacker could split malicious code across multiple Lambda layers or
+  obfuscate the code object to evade string-based detection. The serialized
+  code object could also be manipulated at the bytecode level to avoid
+  known-bad function names.

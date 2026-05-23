@@ -1,0 +1,25 @@
+id: HFA-KRS-004
+severity: medium
+category: keras.lambda_layer.obfuscation
+description: >
+  Lambda layer code shows obfuscation indicators (base64, codecs, getattr, setattr,
+  __dict__, compile). Obfuscated code in a model file strongly suggests an attempt
+  to hide malicious functionality from static analysis.
+targets:
+  - "base64"
+  - "codecs"
+  - "rot13"
+  - "exec"
+  - "eval"
+  - "getattr"
+  - "setattr"
+  - "__dict__"
+  - "compile"
+references: []
+false_positive_notes: >
+  Legitimate models may reference base64 or codecs for data processing.
+  Obfuscation scoring is heuristic; review the full disassembly for intent.
+bypass_notes: >
+  Sophisticated obfuscation can avoid all pattern-based detection. Bytecode
+  manipulation at the marshal level can rename co_names and co_consts to
+  evade string matching entirely.

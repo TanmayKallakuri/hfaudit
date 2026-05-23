@@ -1,0 +1,24 @@
+id: HFA-KRS-003
+severity: medium
+category: keras.lambda_layer.network_code
+description: >
+  Lambda layer code contains network-related references (http, urllib, requests, socket).
+  Network activity from a model file's embedded code is almost never legitimate and
+  suggests data exfiltration or C2 communication.
+targets:
+  - "http"
+  - "urllib"
+  - "requests"
+  - "socket"
+  - "urlopen"
+  - "ftplib"
+  - "httplib"
+  - "http.client"
+references: []
+false_positive_notes: >
+  Network references in Lambda layer code are almost never legitimate. However,
+  false positives can occur if disassembled names coincidentally match
+  (e.g., a co_name containing 'http').
+bypass_notes: >
+  An attacker can encode URLs or use indirect module loading to avoid
+  matching network-related pattern strings.

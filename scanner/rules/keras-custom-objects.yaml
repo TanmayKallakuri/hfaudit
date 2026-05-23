@@ -1,0 +1,16 @@
+id: HFA-KRS-005
+severity: low
+category: keras.custom_objects
+description: >
+  Model references custom objects (non-standard class_names) that would need to be
+  provided via custom_objects dict at load time. Not inherently dangerous but worth
+  noting as part of a model's trust surface.
+references: []
+false_positive_notes: >
+  Custom objects are common in research models and production architectures.
+  This finding is informational; the objects themselves are not dangerous
+  unless they contain untrusted code.
+bypass_notes: >
+  Custom objects require custom_objects dict at load time, which limits
+  the attack surface compared to Lambda layers. However, a malicious custom
+  class could still execute arbitrary code if the user supplies it.

@@ -1,0 +1,30 @@
+id: HFA-KRS-002
+severity: high
+category: keras.lambda_layer.dangerous_import
+description: >
+  Lambda layer code contains references to dangerous callables (os, subprocess, socket,
+  eval, exec, __import__, ctypes, etc.). These are strong indicators of malicious intent
+  when found inside a model file's embedded code.
+targets:
+  - "os"
+  - "subprocess"
+  - "socket"
+  - "eval"
+  - "exec"
+  - "__import__"
+  - "compile"
+  - "ctypes"
+  - "pty"
+  - "shutil"
+  - "builtins"
+  - "pickle"
+  - "marshal"
+  - "open"
+references:
+  - "https://keras.io/api/layers/core_layers/lambda/"
+false_positive_notes: >
+  Some matches may be incidental (e.g., a variable named 'open' or 'compile'
+  in disassembled bytecode). Verify by inspecting the full disassembly.
+bypass_notes: >
+  Attacker can obfuscate imports via getattr, __import__, or dynamic string
+  construction to avoid matching known-bad names in static analysis.
