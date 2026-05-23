@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock, patch
 
-import pytest
 
 from hfaudit.fetchers import FetchResult, FileContent, ModelFile
 from hfaudit.scanner import ScanResult, _classify_file, scan_model

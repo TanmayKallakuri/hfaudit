@@ -78,14 +78,15 @@ class PickleParser(BaseParser):
         try:
             for opcode, arg, pos in pickletools.genops(data):
                 arg_str = repr(arg) if arg is not None else None
-                info = OpcodeInfo(name=opcode.name, arg=arg_str, pos=pos)
+                byte_pos = pos if pos is not None else 0
+                info = OpcodeInfo(name=opcode.name, arg=arg_str, pos=byte_pos)
                 analysis.opcodes.append(info)
 
                 if opcode.name in _EXEC_OPCODE_NAMES:
                     analysis.has_exec_opcodes = True
 
                 if opcode.name in _GLOBAL_OPCODE_NAMES:
-                    self._extract_global_import(opcode.name, arg, pos, analysis)
+                    self._extract_global_import(opcode.name, arg, byte_pos, analysis)
 
                 if isinstance(arg, str) and len(arg) > 0:
                     analysis.raw_strings.append(arg)
@@ -188,7 +189,7 @@ class PickleParser(BaseParser):
     def _extract_fickling_info(self, data: bytes, analysis: PickleAnalysis) -> None:
         """Use fickling for higher-level AST analysis to supplement opcode walking."""
         try:
-            from fickling.fickle import Pickled
+            from fickling.fickle import Pickled  # type: ignore[import-untyped]
 
             pickled = Pickled.load(io.BytesIO(data))
             tree = pickled.ast

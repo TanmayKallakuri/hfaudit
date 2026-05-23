@@ -3,15 +3,12 @@ from __future__ import annotations
 import collections
 import io
 import pickle
-import pickletools
 import struct
 
-import pytest
 
 from hfaudit.detectors.pickle_detector import PickleDetector
 from hfaudit.parsers.pickle_parser import (
     ImportInfo,
-    OpcodeInfo,
     PickleAnalysis,
     PickleParser,
     ReduceCall,

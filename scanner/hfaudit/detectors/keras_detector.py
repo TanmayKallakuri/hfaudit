@@ -85,7 +85,7 @@ class KerasDetector(BaseDetector):
             "HFA-KRS-005",
         ]
 
-    def detect(self, parsed_model: KerasAnalysis) -> list[Finding]:  # type: ignore[override]
+    def detect(self, parsed_model: KerasAnalysis) -> list[Finding]:
         if not isinstance(parsed_model, KerasAnalysis):
             return []
 

@@ -12,7 +12,7 @@ from typing import Any
 from hfaudit.parsers.base import BaseParser
 
 try:
-    import h5py  # noqa: F401 — availability check; actual usage via deferred import
+    import h5py  # type: ignore[import-untyped]  # noqa: F401
 
     _H5PY_AVAILABLE = True
 except ImportError:

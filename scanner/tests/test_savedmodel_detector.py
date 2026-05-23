@@ -5,7 +5,6 @@ import pytest
 from hfaudit.detectors.savedmodel_detector import SavedModelDetector
 from hfaudit.detectors.tf_op_allowlist import SAFE_TF_OPS
 from hfaudit.parsers.savedmodel_parser import (
-    FunctionInfo,
     OpInfo,
     SavedModelAnalysis,
 )
