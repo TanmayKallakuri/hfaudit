@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hfaudit"
+version = "0.1.0"
+description = "Automated security observatory for HuggingFace model repositories"
+requires-python = ">=3.11"
+dependencies = [
+    "fickling",
+    "huggingface_hub",
+    "pydantic>=2.0",
+    "click",
+    "rich",
+]
+
+[project.optional-dependencies]
+tf = ["tensorflow"]
+keras = ["h5py"]
+onnx = ["onnx"]
+all = ["tensorflow", "h5py", "onnx"]
+dev = ["pytest", "pytest-cov", "ruff", "mypy"]
+
+[project.scripts]
+hfaudit = "hfaudit.cli:cli"
+
+[tool.setuptools.packages.find]
+include = ["hfaudit*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

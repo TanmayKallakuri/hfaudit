@@ -1,0 +1,22 @@
+id: HFA-PKL-001
+severity: critical
+category: pickle.reduce.dangerous_callable
+description: "Pickle __reduce__ invokes a known-dangerous callable (os.system, subprocess.Popen, eval, exec, etc.)"
+targets:
+  - "os.system"
+  - "os.popen"
+  - "subprocess.Popen"
+  - "subprocess.call"
+  - "subprocess.check_output"
+  - "eval"
+  - "exec"
+  - "compile"
+  - "__import__"
+  - "posix.system"
+  - "nt.system"
+  - "builtins.eval"
+  - "builtins.exec"
+references:
+  - "https://blog.trailofbits.com/2021/03/15/never-a-dull-moment-when-you-encounter-an-untrusted-pickle/"
+false_positive_notes: "Legitimate models should never invoke these callables via pickle __reduce__. Any hit is suspicious."
+bypass_notes: "Attacker may use getattr chains to resolve callables indirectly, or nest pickles inside marshal/dill to hide the reduce call."
