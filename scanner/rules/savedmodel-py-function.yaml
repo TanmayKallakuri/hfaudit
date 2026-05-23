@@ -1,0 +1,14 @@
+id: HFA-SM-004
+severity: high
+category: savedmodel.py_function
+description: "tf.py_function or tf.numpy_function usage detected. These embed arbitrary Python code that executes on model load, giving the attacker full Python runtime access."
+targets:
+  - "PyFunc"
+  - "PyFuncStateless"
+  - "EagerPyFunc"
+  - "NumpyFunction"
+references:
+  - "https://www.tensorflow.org/api_docs/python/tf/py_function"
+  - "https://www.tensorflow.org/api_docs/python/tf/numpy_function"
+false_positive_notes: "py_function is used in legitimate preprocessing pipelines and custom training loops. numpy_function is occasionally used for custom numeric ops. Inspect the serialized Python callable to determine intent."
+bypass_notes: "The Python callable inside py_function/numpy_function can do anything the Python runtime allows. Obfuscation of the callable is trivial."

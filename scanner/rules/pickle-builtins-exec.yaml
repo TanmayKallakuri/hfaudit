@@ -1,0 +1,15 @@
+id: HFA-PKL-002
+severity: critical
+category: pickle.reduce.builtins_exec
+description: "Pickle invokes a code execution builtin (builtins.exec, builtins.eval, builtins.compile, builtins.__import__)"
+targets:
+  - "builtins.exec"
+  - "builtins.eval"
+  - "builtins.compile"
+  - "builtins.__import__"
+  - "builtins.getattr"
+references:
+  - "https://blog.trailofbits.com/2021/03/15/never-a-dull-moment-when-you-encounter-an-untrusted-pickle/"
+  - "https://docs.python.org/3/library/pickle.html#restricting-globals"
+false_positive_notes: "builtins.getattr is used in some legitimate serialization frameworks (e.g., older PyTorch checkpoints). builtins.__import__ is never legitimate in a model file."
+bypass_notes: "Attacker can avoid builtins prefix by using bare 'eval'/'exec' GLOBAL opcodes, or resolve the callable via getattr on the builtins module object itself."

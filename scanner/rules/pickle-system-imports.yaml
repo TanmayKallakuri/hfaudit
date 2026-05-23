@@ -1,0 +1,19 @@
+id: HFA-PKL-004
+severity: high
+category: pickle.import.system
+description: "Pickle references a system-level module (ctypes, pty, shutil, etc.) with no legitimate use in model deserialization"
+targets:
+  - "ctypes"
+  - "pty"
+  - "shutil"
+  - "tempfile"
+  - "signal"
+  - "multiprocessing"
+  - "threading"
+  - "resource"
+  - "grp"
+  - "pwd"
+references:
+  - "https://jfrog.com/blog/the-risks-of-ai-ml-packages-distributing-malware-through-pypi/"
+false_positive_notes: "multiprocessing and threading can appear in some training checkpoint files that store process state. Inspect the context before confirming."
+bypass_notes: "Attacker can use __import__ to dynamically load these modules, or resolve them via importlib.import_module through a reduce chain."

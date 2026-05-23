@@ -1,0 +1,15 @@
+id: HFA-PKL-006
+severity: high
+category: pickle.behavior.reverse_shell
+description: "Pickle contains indicators of a reverse shell payload (socket + pty.spawn or subprocess + socket combination)"
+pattern_type: compound
+compound_any:
+  - modules: ["socket", "pty"]
+  - modules: ["socket", "subprocess"]
+  - modules: ["socket", "os"]
+    reduce_names: ["dup2"]
+references:
+  - "https://jfrog.com/blog/the-risks-of-ai-ml-packages-distributing-malware-through-pypi/"
+  - "https://www.revshells.com/"
+false_positive_notes: "No legitimate model file should reference both socket and pty/subprocess. Any hit is a true positive."
+bypass_notes: "Attacker can use a single exec() call containing the reverse shell code as a string, avoiding the need for multiple module imports that this compound rule detects."

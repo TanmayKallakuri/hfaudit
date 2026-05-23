@@ -1,0 +1,17 @@
+id: HFA-PKL-007
+severity: medium
+category: pickle.strings.network_indicator
+description: "Pickle string literals contain network indicators (IP addresses, URLs, base64-encoded URLs)"
+pattern_type: regex
+patterns:
+  - name: ipv4_address
+    regex: "\\b(?:(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\b"
+    exclude: ["127.0.0.1", "0.0.0.0"]
+  - name: url
+    regex: "https?://[^\\s'\"]{4,}"
+  - name: base64_url
+    regex: "(?:[A-Za-z0-9+/]{20,}={0,2})"
+references:
+  - "https://jfrog.com/blog/the-risks-of-ai-ml-packages-distributing-malware-through-pypi/"
+false_positive_notes: "Models may contain URLs pointing to HuggingFace hub or documentation as metadata. IP addresses like 127.0.0.1 in test configs are excluded."
+bypass_notes: "Attacker can split strings across multiple pickle operations and concatenate at runtime, or use integer-encoded IP addresses instead of dotted notation."

@@ -1,0 +1,9 @@
+id: HFA-PKL-009
+severity: medium
+category: pickle.obfuscation.nested_payload
+description: "Pickle contains embedded marshal or dill payloads, which can hide executable code from opcode-level scanners"
+references:
+  - "https://blog.trailofbits.com/2021/03/15/never-a-dull-moment-when-you-encounter-an-untrusted-pickle/"
+  - "https://docs.python.org/3/library/marshal.html"
+false_positive_notes: "Some complex serialization libraries (dill, cloudpickle) legitimately nest marshal code objects. If the outer pickle is from a known-safe framework, investigate before confirming."
+bypass_notes: "Attacker can encrypt or compress the nested payload to avoid marshal/dill header detection, then decompress at runtime via a reduce call."

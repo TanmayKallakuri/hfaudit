@@ -1,0 +1,13 @@
+id: HFA-SM-002
+severity: critical
+category: savedmodel.printv2_chain
+description: "PrintV2 op chain bypass detected. PrintV2 receives dynamically constructed string input via string manipulation ops (StringFormat, StringJoin, ReduceJoin) fed by Const nodes containing payload fragments. This pattern was used to bypass ProtectAI ModelScan (issue #342) because PrintV2 was not in their dangerous op list."
+targets:
+  - "PrintV2"
+  - "StringFormat"
+  - "StringJoin"
+  - "ReduceJoin"
+references:
+  - "https://github.com/protectai/modelscan/issues/342"
+false_positive_notes: "PrintV2 is sometimes used legitimately in TF debugging. A standalone PrintV2 with a constant string input is likely benign. The dangerous pattern is PrintV2 receiving dynamically constructed strings."
+bypass_notes: "The original bypass used PrintV2 -> StringFormat/StringJoin -> Const. Variants could use different string construction ops, split the payload across more nodes, or use other 'benign' output ops as the terminal node. An evolved scanner should trace ALL output ops backward, not just PrintV2."

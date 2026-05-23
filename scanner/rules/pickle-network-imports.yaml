@@ -1,0 +1,20 @@
+id: HFA-PKL-003
+severity: high
+category: pickle.import.network
+description: "Pickle references a networking module that has no legitimate use in model deserialization"
+targets:
+  - "socket"
+  - "requests"
+  - "urllib"
+  - "urllib3"
+  - "httplib"
+  - "http.client"
+  - "http"
+  - "paramiko"
+  - "ftplib"
+  - "xmlrpc"
+  - "smtplib"
+references:
+  - "https://jfrog.com/blog/the-risks-of-ai-ml-packages-distributing-malware-through-pypi/"
+false_positive_notes: "Some model files may legitimately reference http.client if they bundle download logic, but this is extremely rare in a serialized weight file."
+bypass_notes: "Attacker can import socket indirectly via __import__('socket') through a reduce chain, or use ctypes to call libc socket functions directly."

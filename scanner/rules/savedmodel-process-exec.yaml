@@ -1,0 +1,9 @@
+id: HFA-SM-003
+severity: critical
+category: savedmodel.process_execution
+description: "Process execution op found in SavedModel graph. This op can execute arbitrary system commands on model load."
+targets:
+  - "ShellExecute"
+references: []
+false_positive_notes: "No legitimate model should contain process execution ops."
+bypass_notes: "Custom ops or tf.py_function could wrap shell execution. Also check for ops registered via tf.load_op_library."

@@ -1,0 +1,13 @@
+id: HFA-SM-001
+severity: critical
+category: savedmodel.dangerous_filesystem_op
+description: "Dangerous filesystem op (ReadFile, WriteFile, MatchingFiles, DeleteFile) found in SavedModel graph. These ops can read/write arbitrary files on the host when the model is loaded."
+targets:
+  - "ReadFile"
+  - "WriteFile"
+  - "MatchingFiles"
+  - "DeleteFile"
+references:
+  - "https://www.tensorflow.org/api_docs/python/tf/io/read_file"
+false_positive_notes: "ReadFile can appear in legitimate image-loading pipelines within SavedModels that bundle preprocessing. Check whether the path input is a constant pointing to a bundled asset vs. a user-controlled placeholder."
+bypass_notes: "Attacker could wrap filesystem ops inside custom ops or use tf.py_function to invoke filesystem calls indirectly. Also possible to use lower-level C++ custom ops that bypass the Python-level graph."

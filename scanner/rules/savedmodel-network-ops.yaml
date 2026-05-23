@@ -1,0 +1,15 @@
+id: HFA-SM-006
+severity: medium
+category: savedmodel.network_op
+description: "Network-related op found in SavedModel graph. Could indicate network access during model load or inference."
+targets:
+  - "TcpClient"
+  - "TcpServer"
+  - "HttpRequest"
+  - "CollectiveReduce"
+  - "CollectiveBcastSend"
+  - "CollectiveBcastRecv"
+  - "CollectiveGather"
+references: []
+false_positive_notes: "Collective ops are used in legitimate distributed training setups. Suspicious when found in a model intended for single-device inference."
+bypass_notes: "Network access could be hidden inside py_function or custom ops. This rule only catches known network op names."

@@ -1,0 +1,22 @@
+id: HFA-PKL-005
+severity: high
+category: pickle.reduce.filesystem_write
+description: "Pickle invokes a filesystem write primitive (open, write_bytes, etc.)"
+targets:
+  - "io.open"
+  - "builtins.open"
+  - "pathlib.Path.write_bytes"
+  - "pathlib.Path.write_text"
+  - "os.makedirs"
+  - "os.mkdir"
+  - "os.rename"
+  - "os.remove"
+  - "os.unlink"
+  - "shutil.copy"
+  - "shutil.copy2"
+  - "shutil.move"
+  - "shutil.rmtree"
+references:
+  - "https://blog.trailofbits.com/2021/03/15/never-a-dull-moment-when-you-encounter-an-untrusted-pickle/"
+false_positive_notes: "Legitimate models never need to write files during deserialization. Any hit is suspicious."
+bypass_notes: "Attacker can use os.fdopen or ctypes to get file descriptors without going through builtins.open. Can also use eval/exec to construct the open call at runtime."

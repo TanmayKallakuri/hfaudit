@@ -1,0 +1,9 @@
+id: HFA-PKL-008
+severity: medium
+category: pickle.obfuscation.getattr_chain
+description: "Pickle uses deep getattr chains (>3 levels) to resolve callables, indicating deliberate obfuscation"
+threshold: 3
+references:
+  - "https://blog.trailofbits.com/2021/03/15/never-a-dull-moment-when-you-encounter-an-untrusted-pickle/"
+false_positive_notes: "Deep getattr chains can appear in complex object hierarchies, but >3 levels in a pickle reduce path is highly unusual for legitimate models."
+bypass_notes: "Attacker can use STACK_GLOBAL directly instead of getattr chains, or spread resolution across multiple reduce calls to stay under the threshold."

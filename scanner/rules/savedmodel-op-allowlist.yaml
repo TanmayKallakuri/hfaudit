@@ -1,0 +1,8 @@
+id: HFA-SM-005
+severity: medium
+category: savedmodel.unknown_op
+description: "Op not in the standard TensorFlow op allowlist. Unknown ops may indicate custom or malicious operations. The allowlist is intentionally tight to surface novel threats."
+targets: []
+references: []
+false_positive_notes: "The allowlist is intentionally tight. Legitimate models using newer TF ops, contrib ops, or domain-specific ops (e.g., audio, text) may trigger this. Review the op documentation before escalating."
+bypass_notes: "An attacker registering a custom op could name it to look benign. The allowlist approach catches novel ops but can be evaded by hijacking an allowed op name via tf.load_op_library."
