@@ -7,8 +7,9 @@ import marshal
 import zipfile
 from pathlib import Path
 
-import h5py
 import pytest
+
+h5py = pytest.importorskip("h5py")
 
 from hfaudit.parsers.keras_parser import KerasAnalysis, KerasParser
 from hfaudit.detectors.keras_detector import KerasDetector

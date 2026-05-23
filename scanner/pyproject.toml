@@ -23,7 +23,7 @@ tf = ["tensorflow"]
 keras = ["h5py"]
 onnx = ["onnx"]
 all = ["tensorflow", "h5py", "onnx"]
-dev = ["pytest", "pytest-cov", "ruff", "mypy"]
+dev = ["pytest", "pytest-cov", "ruff", "mypy", "types-PyYAML"]
 
 [project.scripts]
 hfaudit = "hfaudit.cli:cli"

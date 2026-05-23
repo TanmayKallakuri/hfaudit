@@ -18,9 +18,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-      - run: pip install ruff mypy pydantic click rich fickling huggingface_hub
+      - run: pip install -e ".[dev,keras]" types-PyYAML supabase httpx
       - run: ruff check hfaudit/
-      - run: mypy hfaudit/
+      - run: mypy hfaudit/ --strict
 
   scanner-test:
     name: Scanner Tests (Python ${{ matrix.python-version }})
@@ -36,7 +36,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - run: pip install -e ".[dev]"
+      - run: pip install -e ".[dev,keras]"
       - run: pytest --tb=short -q
 
   web-lint:
