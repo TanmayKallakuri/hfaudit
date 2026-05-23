@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+*.so
+
+# Node
+node_modules/
+.next/
+out/
+.env*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.production.local
+
+# Project-specific — disclosure-sensitive
+disclosure/ledger.json
+
+# Test corpus — malicious samples never committed publicly
+tests/corpus/*.pt
+tests/corpus/*.pth
+tests/corpus/*.bin
+tests/corpus/*.ckpt
+tests/corpus/*.pb
+tests/corpus/*.h5
+tests/corpus/*.keras
+tests/corpus/*.onnx
+
+# Supabase local
+.supabase/

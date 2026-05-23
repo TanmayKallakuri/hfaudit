@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Literal
+from typing import ClassVar, Literal
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -28,7 +28,7 @@ class Finding(BaseModel):
             raise ValueError("Finding id must start with 'HFA-'")
         return v
 
-    _SEVERITY_TO_SARIF: dict[str, str] = {
+    _SEVERITY_TO_SARIF: ClassVar[dict[str, str]] = {
         "critical": "error",
         "high": "error",
         "medium": "warning",

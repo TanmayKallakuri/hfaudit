@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Any
+from typing import Any  # heterogeneous parsed model types; narrowed by concrete subclasses
 
 from hfaudit.reporting.finding import Finding
 

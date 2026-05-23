@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Any
+from typing import Any  # return type varies per format; narrowed by concrete subclasses
 
 
 class BaseParser(ABC):
