@@ -309,15 +309,13 @@ This is load-bearing. Bad disclosure burns the project; good disclosure builds c
 
 > **Update this section at the end of every working session. Claude Code reads this first to know what to work on next.**
 
-**Current phase:** Phase 0 — Foundation (in progress).
+**Current phase:** Phase 1 — Scanner core (complete).
 
 **Completed:**
-- [x] Repository scaffold per architecture
-- [x] Python package skeleton with pyproject.toml, lint/type/test config
-- [x] Supabase schema migrations
-- [x] Next.js skeleton with shadcn/ui initialized
+- [x] Phase 0: Repository scaffold, Python package, Next.js dashboard, Supabase schema, CI pipeline
+- [x] Phase 1: HuggingFace fetcher with range-requests, pickle parser + 10 detection rules, SavedModel parser + 6 rules (including PrintV2 chain bypass), Keras parser + 5 Lambda layer rules, CLI wired end-to-end with JSON/SARIF output, 184 tests passing
 
-**Next action:** Complete remaining Phase 0 items, then begin Phase 1 (Scanner core).
+**Next action:** Phase 2 — Triage and scoring (severity rubric, Stage 2 heuristic signals, Supabase persistence).
 
 **Recent decisions logged:**
 - License: Apache 2.0
