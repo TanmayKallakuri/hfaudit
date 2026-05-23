@@ -309,14 +309,15 @@ This is load-bearing. Bad disclosure burns the project; good disclosure builds c
 
 > **Update this section at the end of every working session. Claude Code reads this first to know what to work on next.**
 
-**Current phase:** Phase 2 — Triage and scoring (complete).
+**Current phase:** Phase 3 — Sandboxed analysis (complete).
 
 **Completed:**
 - [x] Phase 0: Repository scaffold, Python package, Next.js dashboard, Supabase schema, CI pipeline
 - [x] Phase 1: HuggingFace fetcher with range-requests, pickle parser + 10 detection rules, SavedModel parser + 6 rules (including PrintV2 chain bypass), Keras parser + 5 Lambda layer rules, CLI wired end-to-end with JSON/SARIF output
-- [x] Phase 2: Typosquatting detection (Levenshtein + homoglyph), account reputation signals, severity scoring engine (upgrade-only), Supabase persistence layer, 260 tests passing
+- [x] Phase 2: Typosquatting detection (Levenshtein + homoglyph), account reputation signals, severity scoring engine (upgrade-only), Supabase persistence layer
+- [x] Phase 3: gVisor sandbox runner, strace syscall tracing, malicious behavior detection (4 categories), Stage 3 trigger logic, per-format loader scripts, 318 tests passing
 
-**Next action:** Phase 3 — Sandboxed analysis (gVisor container, syscall tracing, Stage 3 trigger logic).
+**Next action:** Phase 4 — Observatory dashboard (wire Next.js to Supabase, live stats, methodology page, findings archive, rules browser).
 
 **Recent decisions logged:**
 - License: Apache 2.0
