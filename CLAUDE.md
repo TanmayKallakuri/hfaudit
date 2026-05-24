@@ -309,15 +309,17 @@ This is load-bearing. Bad disclosure burns the project; good disclosure builds c
 
 > **Update this section at the end of every working session. Claude Code reads this first to know what to work on next.**
 
-**Current phase:** Phase 3 — Sandboxed analysis (complete).
+**Current phase:** Phase 5 — Polish and deployment (complete).
 
 **Completed:**
 - [x] Phase 0: Repository scaffold, Python package, Next.js dashboard, Supabase schema, CI pipeline
 - [x] Phase 1: HuggingFace fetcher with range-requests, pickle parser + 10 detection rules, SavedModel parser + 6 rules (including PrintV2 chain bypass), Keras parser + 5 Lambda layer rules, CLI wired end-to-end with JSON/SARIF output
 - [x] Phase 2: Typosquatting detection (Levenshtein + homoglyph), account reputation signals, severity scoring engine (upgrade-only), Supabase persistence layer
 - [x] Phase 3: gVisor sandbox runner, strace syscall tracing, malicious behavior detection (4 categories), Stage 3 trigger logic, per-format loader scripts, 318 tests passing
+- [x] Phase 4: Observatory dashboard — lazy Supabase client, data-fetching layer (queries.ts), custom components (SeverityBadge, StatsGrid, FindingCard, RuleCard), home page with live stats, findings archive + detail pages, rules browser with category grouping, URL protocol validation on references, bounded evidence display
+- [x] Phase 5: README (human-facing, security-researcher-oriented), COMPARISON.md updated from "Planned" to implemented status, deployment configs verified (.gitignore, .env.example, infra README)
 
-**Next action:** Phase 4 — Observatory dashboard (wire Next.js to Supabase, live stats, methodology page, findings archive, rules browser).
+**Next action:** Deployment — create Supabase project, set env vars, deploy to Vercel, run first scan against a real model, smoke test the live dashboard. Then seed scanner/rules into the rules table and run initial scans to populate scan_stats.
 
 **Recent decisions logged:**
 - License: Apache 2.0
@@ -325,6 +327,10 @@ This is load-bearing. Bad disclosure burns the project; good disclosure builds c
 - Severity rubric finalized (Critical/High/Medium/Low/Informational; only Critical/High named publicly post-disclosure)
 - Disclosure window: 90 days default
 - Sandbox: gVisor for v1, Firecracker reserved for future
+- Supabase client: lazy singleton factory (returns null when env vars missing, build succeeds without Supabase)
+- Finding detail 404: uses Next.js notFound() for proper HTTP status
+- Evidence display: max-h-96 overflow-auto to prevent layout blowout from large attacker-controlled content
+- Reference links: protocol-validated (https/http only) to prevent javascript: URI injection
 
 ---
 

@@ -1,6 +1,10 @@
-import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
+import { FindingCard } from "@/components/finding-card";
+import { getPublishedFindings } from "@/lib/queries";
 
-export default function FindingsPage() {
+export default async function FindingsPage() {
+  const findings = await getPublishedFindings();
+
   return (
     <div className="space-y-8">
       <section>
@@ -13,19 +17,30 @@ export default function FindingsPage() {
         </p>
       </section>
 
-      <div className="rounded-lg border border-border p-8 text-center">
-        <p className="font-mono text-lg text-muted-foreground">
-          No published findings yet
-        </p>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Findings will appear here after their 90-day disclosure window closes.
-          See our{" "}
-          <Badge variant="outline" className="font-mono text-xs">
-            disclosure policy
-          </Badge>{" "}
-          for details.
-        </p>
-      </div>
+      {findings.length > 0 ? (
+        <div className="space-y-4">
+          {findings.map((finding) => (
+            <FindingCard key={finding.id} finding={finding} />
+          ))}
+        </div>
+      ) : (
+        <div className="rounded-lg border border-border p-8 text-center">
+          <p className="font-mono text-lg text-muted-foreground">
+            No published findings yet
+          </p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Findings will appear here after their 90-day disclosure window
+            closes. See our{" "}
+            <Link
+              href="/disclosure"
+              className="underline underline-offset-4 transition-colors hover:text-foreground"
+            >
+              disclosure policy
+            </Link>{" "}
+            for details.
+          </p>
+        </div>
+      )}
     </div>
   );
 }
