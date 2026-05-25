@@ -5,7 +5,7 @@ How HFAudit compares to existing tools in the ML model security space. Updated h
 | Capability | HFAudit | ModelScan | Picklescan | Fickling |
 |---|---|---|---|---|
 | **Pickle analysis** | Yes — opcode-level static analysis via fickling + custom walker (10 rules) | Yes — signature-based | Yes — signature-based | Yes — deep pickle analysis |
-| **SavedModel analysis** | Yes — graph traversal + op allowlist + PrintV2 chain detection (2 rules) | Yes — basic op check | No | No |
+| **SavedModel analysis** | Yes — graph traversal + op allowlist + PrintV2 chain detection (6 rules) | Yes — basic op check | No | No |
 | **Keras Lambda detection** | Yes — Lambda layer + code object inspection (5 rules) | Yes — basic check | No | No |
 | **ONNX analysis** | Yes — custom op domain detection | Yes — basic | No | No |
 | **GGUF analysis** | Yes — metadata anomaly detection | No | No | No |

@@ -44,13 +44,13 @@ export function RuleCard({ rule }: { rule: Rule }) {
           </div>
         )}
 
-        {rule.references.length > 0 && (
+        {rule.references.filter((ref) => ref.startsWith("https://") || ref.startsWith("http://")).length > 0 && (
           <div className="flex flex-wrap gap-2">
             {rule.references
               .filter((ref) => ref.startsWith("https://") || ref.startsWith("http://"))
-              .map((ref) => (
+              .map((ref, i) => (
               <a
-                key={ref}
+                key={`${ref}-${i}`}
                 href={ref}
                 target="_blank"
                 rel="noopener noreferrer"

@@ -28,7 +28,7 @@ hfaudit scan meta-llama/Llama-3-8B --format sarif
 
 HFAudit runs three analysis stages. Every model goes through Stage 1. Only flagged models advance.
 
-**Stage 1 -- Static analysis.** Opcode-level pickle inspection (dangerous `__reduce__` callables, suspicious imports, obfuscation via getattr chains or marshal/dill nesting). SavedModel graph traversal against an op allowlist (including the PrintV2 op chain bypass disclosed by this project's author to ProtectAI, which no other public scanner detects). Keras Lambda layer decompilation. ONNX custom op detection. 17 detection rules defined in YAML, each with documented bypass techniques.
+**Stage 1 -- Static analysis.** Opcode-level pickle inspection (dangerous `__reduce__` callables, suspicious imports, obfuscation via getattr chains or marshal/dill nesting). SavedModel graph traversal against an op allowlist (including the PrintV2 op chain bypass disclosed by this project's author to ProtectAI, which no other public scanner detects). Keras Lambda layer decompilation. ONNX custom op detection. 21 detection rules defined in YAML, each with documented bypass techniques.
 
 **Stage 2 -- Heuristic signals.** Account age and upload patterns. Typosquatting detection using Levenshtein distance and homoglyph matching against the top 1,000 model names. Upload metadata anomalies.
 
@@ -64,7 +64,7 @@ HFAudit operates a coordinated disclosure pipeline with HuggingFace's security t
 
 ## Detection rules
 
-All 17 rules live in `scanner/rules/` as YAML files. Each rule includes:
+All 21 rules live in `scanner/rules/` as YAML files. Each rule includes:
 
 - Severity level and category
 - Known false positive conditions

@@ -160,7 +160,7 @@ export default async function FindingPage({ params }: FindingPageProps) {
             </CardContent>
           </Card>
 
-          {finding.references.length > 0 && (
+          {finding.references.filter((ref) => ref.startsWith("https://") || ref.startsWith("http://")).length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle className="font-mono text-base">
@@ -171,8 +171,8 @@ export default async function FindingPage({ params }: FindingPageProps) {
                 <ul className="space-y-2">
                   {finding.references
                     .filter((ref) => ref.startsWith("https://") || ref.startsWith("http://"))
-                    .map((ref) => (
-                    <li key={ref}>
+                    .map((ref, i) => (
+                    <li key={`${ref}-${i}`}>
                       <a
                         href={ref}
                         target="_blank"
